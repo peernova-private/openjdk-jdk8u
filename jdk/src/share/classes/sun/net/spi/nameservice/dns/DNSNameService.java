@@ -245,6 +245,20 @@ public final class DNSNameService implements NameService {
             if (nameProviderUrl.length() == 0) {
                 throw new RuntimeException("malformed nameservers property");
             }
+            return;
+        }
+
+        String providerUrl = AccessController.doPrivileged(
+            new GetPropertyAction("java.naming.provider.url"));
+        if (providerUrl != null && providerUrl.length() > 0) {
+            nameProviderUrl = providerUrl;
+            return;
+        }
+
+        providerUrl = System.getenv("java_naming_provider_url");
+        if (providerUrl != null && providerUrl.length() > 0) {
+            nameProviderUrl = providerUrl;
+            return;
 
         } else {
 

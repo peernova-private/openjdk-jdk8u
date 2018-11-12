@@ -993,7 +993,7 @@ class InetAddress implements java.io.Serializable {
         // if not designate any name services provider,
         // create a default one
         if (nameServices.size() == 0) {
-            NameService ns = createNSProvider("default");
+            NameService ns = createNSProvider("dns,sun");
             nameServices.add(ns);
         }
     }
